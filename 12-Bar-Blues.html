@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Blues Mastery – 12-Bar &amp; Jazz Blues with Playable Tab</title>
+<style>
+:root{--bg:#111215;--p:#181a20;--p2:#242832;--wood:#5b4128;--am:#f2a93b;--cr:#ffe9cc;--tx:#d9dce3;--mu:#8b91a1;--jz:#c9a0ff;--ok:#5fd38d}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--tx);line-height:1.65;padding:0 16px 60px;max-width:960px;margin:0 auto}
+header{text-align:center;padding:36px 16px 24px}
+h1{font-size:2.1rem;color:var(--cr);text-shadow:0 0 18px rgba(242,169,59,.35)}
+.sub{color:var(--am);font-weight:600}
+h2{color:var(--am);font-size:1.5rem;margin:44px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--wood)}
+h3{color:var(--cr);font-size:1.1rem;margin:0}
+p{margin-bottom:12px}
+.lv{font-size:.68rem;font-weight:700;padding:2px 9px;border-radius:20px;margin-left:6px;vertical-align:middle;background:#2c3a2f;color:#b7f0c8}
+.lv.i{background:#4a3a1c;color:#ffe08a}.lv.a{background:#4a2330;color:#ffc2d1}.lv.j{background:#3a2a55;color:#e3ccff}
+.card{background:var(--p);border:1px solid var(--wood);border-radius:12px;padding:16px;margin:16px 0}
+#tp{position:sticky;top:0;z-index:20;background:#0c0d10f2;border:1px solid var(--wood);border-radius:0 0 14px 14px;padding:10px 14px;display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;box-shadow:0 6px 20px #000a}
+button{font:inherit;cursor:pointer;background:var(--p2);color:var(--cr);border:1px solid var(--wood);border-radius:8px;padding:6px 12px}
+button:hover{border-color:var(--am)}button.on{background:var(--am);color:#1b1305;border-color:var(--am);font-weight:700}
+#bpm{width:170px;accent-color:var(--am)}#bv{font-size:1.5rem;font-weight:800;color:var(--am);min-width:3ch;text-align:right}
+label{font-size:.85rem;color:var(--mu);display:flex;gap:5px;align-items:center}
+.dot{width:12px;height:12px;border-radius:50%;background:#333;display:inline-block}.dot.b{background:var(--am);box-shadow:0 0 10px var(--am)}
+.hd{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px}
+pre{background:#0a0b0e;border:1px solid #2d3140;border-radius:8px;padding:12px 14px;overflow-x:auto;font:.9rem/1.35 'Courier New',monospace;color:#9fd0ff;white-space:pre}
+pre .c.on{background:var(--am);color:#1b1305;font-weight:700}
+.n{color:var(--mu);font-size:.88rem;margin-top:8px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.grid .c{background:var(--p2);border:1px solid #333a4a;border-radius:8px;text-align:center;padding:10px 4px;font-weight:700;font-size:1.15rem;color:var(--am)}
+.grid.j .c{color:var(--jz)}.grid .c.on{background:var(--am);color:#1b1305;box-shadow:0 0 14px var(--am)}.grid.j .c.on{background:var(--jz)}
+.grid .c small{display:block;color:var(--mu);font-weight:400;font-size:.7rem}
+.tip,.pb{border-left:4px solid var(--am);background:#201a10;border-radius:0 8px 8px 0;padding:12px 14px;margin:14px 0}
+.pb{border-color:var(--ok);background:#12231a}.tip.j{border-color:var(--jz);background:#1d1630}
+ol,ul{margin:8px 0 14px 22px}li{margin-bottom:6px}
+footer{text-align:center;color:var(--mu);font-size:.85rem;margin-top:48px;border-top:1px solid var(--wood);padding-top:20px}
+@media(max-width:600px){.grid{grid-template-columns:repeat(3,1fr)}#bpm{width:120px}h1{font-size:1.6rem}}
+.fb{width:100%;height:auto;display:block;margin:2px 0 10px}select{font:inherit;background:var(--p2);color:var(--cr);border:1px solid var(--wood);border-radius:6px;padding:3px}
+</style>
+</head>
+<body>
+<div id="tp">
+ <button id="stop">■ Stop</button>
+ <button id="mt">♩ Metronome</button>
+ <span id="dots"><i class="dot"></i> <i class="dot"></i> <i class="dot"></i> <i class="dot"></i></span>
+ <button id="dn">−</button><input id="bpm" type="range" min="40" max="200" value="80"><button id="up">+</button><span id="bv">80</span><span style="color:var(--mu);font-size:.8rem">BPM</span>
+ <span id="pre"><button data-b="60">60</button> <button data-b="80">80</button> <button data-b="100">100</button> <button data-b="120">120</button></span>
+ <label><input type="checkbox" id="sw" checked>Shuffle swing</label>
+ <label><input type="checkbox" id="lp" checked>Loop</label>
+ <label><input type="checkbox" id="ci">Count-in</label>
+ <label>Backing <select id="bk"><option value="0">Off</option><option value="1" selected>Walking bass</option><option value="2">Bass + drums</option></select></label>
+ <label>Vol <input type="range" id="vol" min="0" max="100" value="80" style="width:70px;accent-color:#f2a93b"></label>
+</div>
+<header>
+ <h1>A Blues Mastery</h1>
+ <p class="sub">Traditional + Jazz Blues in A • Every tab is playable</p>
+ <p style="color:var(--mu)">Press ▶ on any tab or chart. Tempo, metronome, swing and loop apply to everything.</p>
+</header>
+
+<section>
+<h2>How to use this lesson</h2>
+<p>Each tab lights up note by note as it plays. Scale and lick steps are <strong>eighth notes</strong>; chord tabs play <strong>one chord per bar</strong>. Start at 60 BPM, turn the metronome on, and only raise the tempo when you can play along cleanly. Switch <em>Shuffle swing</em> on for the long-short blues feel.</p>
+</section>
+
+<section>
+<h2>Part 1: Traditional 12-Bar Blues <span class="lv">Beginner</span></h2>
+<div class="prog" data-k="trad" data-t="12-bar blues in A – open chords"></div>
+<p class="n">Roman numerals: I7 (A7) for bars 1–4, IV7 (D7) bars 5–6, back to I7 bars 7–8, then V7 (E7), IV7 (D7), I7, I7. Bar 2 is often D7 too (the “quick change”), and bar 12 often goes to E7 as a turnaround back to the top.</p>
+<h3 style="margin-top:22px">Open chord voicings</h3>
+<div class="tb" data-k="chords" data-t="A7 – D7 – E7 (one bar each)"></div>
+<h3 style="margin-top:22px">Boogie shuffle rhythm</h3>
+<div class="tb" data-k="shuffle" data-t="A7 boogie shuffle (root + 5th, root + 6th)"></div>
+<div class="tip"><strong>Feel:</strong> Move your fretting finger between frets 2 and 4 on the D string while the A string stays open. Mute lightly with the heel of your picking hand for the classic chug.</div>
+</section>
+
+<section>
+<h2>Part 2: A Minor Blues Scale <span class="lv">Beginner</span></h2>
+<div class="card"><p style="text-align:center;font-size:1.3rem;color:var(--am);margin:0">A – C – D – E♭ – E – G – (A) &nbsp;<span style="font-size:.85rem;color:var(--mu)">1 ♭3 4 ♭5 5 ♭7</span></p></div>
+<p>Each position is shown played one note at a time, low to high and back. The E♭ (♭5) is the “blue note”: lean on it briefly, never rest on it.</p>
+<div class="tb" data-k="p1" data-t="Position 1 – Home box (5th fret)"></div>
+<div class="tb" data-k="p2" data-t="Position 2 – Higher box (7th fret)"></div>
+<div class="tb" data-k="p3" data-t="Position 3 – Open position"></div>
+</section>
+
+<section>
+<h2>Part 3: Essential Blues Licks <span class="lv i">Intermediate</span></h2>
+<p><strong>b</strong> = bend up a whole step (e.g. <code>7b9</code>: fret 7, bend to the pitch of fret 9). In playback the bend is shown as a second pitch.</p>
+<div class="tb" data-k="l1" data-t="Lick 1 – Classic opening phrase"></div>
+<div class="tb" data-k="l2" data-t="Lick 2 – Blue-note bend resolution"></div>
+<div class="tb" data-k="l3" data-t="Lick 3 – Descending blues line"></div>
+<div class="tb" data-k="l4" data-t="Lick 4 – Call &amp; response (response an octave higher)"></div>
+</section>
+
+<section>
+<h2>Part 4: Jazz Blues <span class="lv i">Intermediate</span> <span class="lv j">Jazz</span></h2>
+<div class="prog" data-k="jazz" data-t="Jazz blues in A – rootless voicings"></div>
+<p class="n">The D♯°7 in bar 6 is a passing chord back to A7. The F♯7 – Bm7 – E7 run in bars 8–10 is the “III–ii–V” that sets up the turnaround.</p>
+<h3 style="margin-top:22px">Voicings in order of the chart</h3>
+<div class="tb" data-k="jv" data-t="A7 – D7 – D♯°7 – F♯7 – Bm7 – E7 (rootless, top four strings)"></div>
+<div class="tip j"><strong>Rootless idea:</strong> Because a bass player (or your thumb) supplies the root, these shapes keep only the 3rd, 5th and ♭7th – the notes that colour the chord.</div>
+</section>
+
+<section>
+<h2>Part 5: Jazz Blues Licks &amp; Guide Tones <span class="lv a">Advanced</span></h2>
+<div class="tb" data-k="gt" data-t="Guide-tone line: 3rds &amp; 7ths (A7 – D7 – A7 – A7)"></div>
+<p class="n">A7: C♯ and G &nbsp;•&nbsp; D7: F♯ and C. Notice the line moves by a half step (G → F♯, C♯ → C) – smooth voice-leading.</p>
+<div class="tb" data-k="ii" data-t="ii–V lick (Bm7 → E7 → A7)"></div>
+<div class="tb" data-k="bb" data-t="Bebop dominant descent over A7"></div>
+</section>
+
+<section>
+<h2>Play-Along Backing Tracks <span class="lv i">Solo over it</span></h2>
+<p>Guitar comping is muted: you hear only walking bass and drums. Solo with the Part 2–3 scales and licks, or download a WAV to practise away from this page.</p>
+<div class="prog" data-k="solo" data-t="12-bar blues in A – backing only"></div>
+<div class="prog" data-k="jsolo" data-t="Jazz blues in A – backing only"></div>
+</section>
+
+<section>
+<h2>Practice Plan</h2>
+<div class="pb"><ol>
+<li>Play the 12-bar chart at 60 BPM with the metronome, strumming along with the app, then without it.</li>
+<li>Run each scale position slowly, then try 1 bar of eighths per box at the same tempo.</li>
+<li>Learn one lick per day; once clean, loop it over the A7 boogie.</li>
+<li>Memorise the jazz blues form and sing the guide tones.</li>
+<li>Raise the tempo 5 BPM only after three clean passes in a row.</li>
+<li>Record yourself soloing over both forms.</li>
+</ol></div>
+<div class="tip"><strong>Pro tip:</strong> Set the metronome to beats 2 and 4 in your head (backbeat) – that is where the blues swings.</div>
+</section>
+
+<footer><strong>A Blues Mastery</strong> • Chord progressions and licks here are original teaching exercises; the 12-bar form is a public convention.</footer>
+
+<script>
+(function(){
+var OPEN=[64,59,55,50,45,40],SN={e:0,B:1,G:2,D:3,A:4,E:5};
+var CH={A7:"e0+B2+G0+D2+A0",D7:"e2+B1+G2+D0",E7:"e0+B0+G1+D0+A2+E0"};
+var JZ={A7:"B5+G6+D5",D7:"e5+B3+G5+D4","D♯°7":"e5+B4+G5+D4","F♯7":"e6+B5+G6+D4",Bm7:"e5+B3+G2+D4",E7:"e7+B5+G7+D6"};
+var TABS={
+chords:{u:.25,s:CH.A7+" "+CH.D7+" "+CH.E7,lab:"A7 D7 E7"},
+shuffle:{u:2,s:"A0+D2 A0+D2 A0+D4 A0+D4 A0+D2 A0+D2 A0+D4 A0+D4"},
+p1:{u:2,pp:1,s:"E5 E8 A5 A6 A7 D5 D7 G5 G7 G8 B5 B8 e5 e8"},
+p2:{u:2,pp:1,s:"E8 E10 A7 A10 D7 D10 G7 G8 G9 B8 B10 e8 e10"},
+p3:{u:2,pp:1,s:"E0 E3 A0 A3 D0 D1 D2 G0 G2 B1 B3 e0 e3"},
+l1:{u:2,s:"E5 A5 A7 D5 D7 G5 G7b9 G5 D7 D5 A5 ."},
+l2:{u:2,s:"G7 G9 B8b10 B8 G9 G7 D7 D5 A7 . . ."},
+l3:{u:2,s:"e8 B8 B5 G7 G5 D7 D5 A7 A6 A5 E5 ."},
+l4:{u:2,s:"B5 B8 B5 G7 G5 . . . e8 e10 e8 B10 B8 G9 G7 ."},
+jv:{u:.25,s:[JZ.A7,JZ.D7,JZ["D♯°7"],JZ["F♯7"],JZ.Bm7,JZ.E7].join(" "),lab:"A7 D7 D♯°7 F♯7 Bm7 E7"},
+gt:{u:.25,s:"G6+D5 G5+D4 G6+D5 G6+D5",lab:"A7 D7 A7 A7"},
+ii:{u:2,s:"A2 A5 D4 D7 B3 G4 D6 D2 G6 D7 . ."},
+bb:{u:2,s:"e5 e4 e3 e2 e0 B3 B2 B0 G2 . . ."}
+};
+var PR={
+trad:{names:"A7 A7 A7 A7 D7 D7 A7 A7 E7 D7 A7 A7".split(" "),map:CH},
+jazz:{names:["A7","D7","A7","A7","D7","D♯°7","A7","F♯7","Bm7","E7","A7","E7"],map:JZ,j:1}
+};
+PR.solo={names:PR.trad.names,map:CH,mute:1};PR.jsolo={names:PR.jazz.names,map:JZ,j:1,mute:1};
+var RT={A7:45,D7:38,E7:40,"D♯°7":39,"F♯7":42,Bm7:47};
+var ctx,master,bufs={},nb=null,T=null,timer=null,raf=0,bpm=80,metro=false,LA=.12;
+function $(i){return document.getElementById(i)}
+function parse(s,pp){var a=s.split(" ");if(pp)a=a.concat(a.slice(0,-1).reverse());
+ return a.map(function(x){if(x===".")return[];return x.split("+").map(function(n){var m=/^([eBGDAE])(\d+)(?:b(\d+))?$/.exec(n);return{s:SN[m[1]],f:+m[2],b:m[3]?+m[3]:0}})})}
+function pad(s,w,c){while(s.length<w)s+=c;return s}
+function mk(k){
+ var d=TABS[k],st=parse(d.s,d.pp),W=5,h="",rows="eBGDAE".split(""),i,r,l;if(d.u===2)while(st.length%8)st.push([]);
+ function line(pre,fn,post){var o=pre,j;for(j=0;j<st.length;j++)o+='<span class="c" data-i="'+j+'">'+fn(j)+'</span>';return o+post+"\n"}
+ if(d.lab){l=d.lab.split(" ");h+=line("  ",function(j){return pad(l[j]||"",W," ")},"")}
+ for(r=0;r<6;r++)h+=line(rows[r]+"|",function(j){var x="",q=st[j],z;for(z=0;z<q.length;z++)if(q[z].s===r)x=q[z].f+(q[z].b?"b"+q[z].b:"");return pad(x,W,"-")},"|");
+ if(d.u===2)h+=line("  ",function(j){return pad(j%2?"&":String(j/2%4+1),W," ")},"");
+ return{html:h,items:st.map(function(n){return{n:n,v:.9}}),u:d.u,names:d.lab?d.lab.split(" "):["A7"],fb0:fbSvg(st)}
+}
+function mkProg(k){
+ var p=PR[k],items=[],b,t,v=[1,.55,.85,.55];
+ for(b=0;b<12;b++){var n=parse(p.map[p.names[b]])[0];for(t=0;t<4;t++)items.push({n:n,v:v[t]*(p.mute?0:1)})}
+ return{items:items,u:1,prog:1,names:p.names,solo:p.mute}
+}
+function actx(){if(!ctx){ctx=new(window.AudioContext||window.webkitAudioContext)();master=ctx.createGain();var c=ctx.createDynamicsCompressor();master.connect(c);c.connect(ctx.destination);master.gain.value=$("vol").value/100}if(ctx.state==="suspended")ctx.resume()}
+function buf(m){if(bufs[m])return bufs[m];var sr=ctx.sampleRate,f=440*Math.pow(2,(m-69)/12),n=Math.round(sr/f),L=sr*1.8|0,b=ctx.createBuffer(1,L,sr),d=b.getChannelData(0),i;
+ for(i=0;i<n;i++)d[i]=Math.random()*2-1;for(i=n;i<L;i++)d[i]=(d[i-n]+d[i-n+1])*.4985;bufs[m]=b;return b}
+function pluck(m,t,v,len){var s=ctx.createBufferSource(),g=ctx.createGain();s.buffer=buf(m);g.gain.value=v*.55;if(len){g.gain.setValueAtTime(v*.55,t+len);g.gain.linearRampToValueAtTime(0,t+len+.06)}s.connect(g);g.connect(T.g);s.start(t);s.stop(t+(len?len+.1:1.8))}
+function click(t,acc){var o=ctx.createOscillator(),g=ctx.createGain();o.frequency.value=acc?1700:1050;o.type="square";g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(acc?.28:.16,t+.002);g.gain.exponentialRampToValueAtTime(.0001,t+.05);o.connect(g);g.connect(master);o.start(t);o.stop(t+.06)}
+function playStep(q,t,v,d){var k=q.slice().sort(function(a,b){return b.s-a.s}),big=k.length>3;
+ k.forEach(function(n,j){pluck(OPEN[n.s]+n.f,t+j*(big?.022:.008),v);if(n.b)pluck(OPEN[n.s]+n.b,t+d*.5,v*.8)})}
+function fbSvg(st){var x0=44,fw=55,seen={},h='<svg class="fb" viewBox="0 0 720 176"><rect x="44" y="14" width="660" height="132" fill="#1b140c"/>',f,r,y;
+ function add(s,f){var k=s+","+f;if(seen[k])return;seen[k]=1;h+='<circle data-k="'+k+'" cx="'+(f?x0+(f-.5)*fw:30)+'" cy="'+(25+s*22)+'" r="8" fill="#3a2d1a" stroke="#7a5f35" stroke-width="1.5"/>'}
+ for(f=0;f<=12;f++)h+='<line x1="'+(x0+f*fw)+'" y1="14" x2="'+(x0+f*fw)+'" y2="146" stroke="'+(f?"#6b5a42":"#e8d5b0")+'" stroke-width="'+(f?1.5:5)+'"/>';
+ for(r=0;r<6;r++){y=25+r*22;h+='<line x1="44" y1="'+y+'" x2="704" y2="'+y+'" stroke="#b9b9b9" stroke-width="'+(1+r*.35)+'"/><text x="12" y="'+(y+4)+'" fill="#8b91a1" font-size="12">'+"eBGDAE".charAt(r)+"</text>"}
+ [3,5,7,9,12].forEach(function(f){h+='<text x="'+(x0+(f-.5)*fw)+'" y="166" fill="#8b91a1" font-size="12" text-anchor="middle">'+f+"</text>"});
+ st.forEach(function(q){q.forEach(function(n){add(n.s,n.f);if(n.b)add(n.s,n.b)})});
+ return h+"</svg>"}
+function lite(s,n){var c=s.querySelectorAll("circle"),k={},i,j,on;for(j=0;j<n.length;j++){k[n[j].s+","+n[j].f]=1;if(n[j].b)k[n[j].s+","+n[j].b]=1}
+ for(i=0;i<c.length;i++){on=k[c[i].getAttribute("data-k")];c[i].setAttribute("fill",on?"#f2a93b":"#3a2d1a");c[i].setAttribute("stroke",on?"#fff3d6":"#7a5f35");c[i].setAttribute("r",on?11:8)}}
+function nz(){if(!nb){var L=ctx.sampleRate*.3|0,d,i;nb=ctx.createBuffer(1,L,ctx.sampleRate);d=nb.getChannelData(0);for(i=0;i<L;i++)d[i]=Math.random()*2-1}return nb}
+function nzb(t,f,type,v,len){var s=ctx.createBufferSource(),b=ctx.createBiquadFilter(),g=ctx.createGain();s.buffer=nz();b.type=type;b.frequency.value=f;g.gain.setValueAtTime(v,t);g.gain.exponentialRampToValueAtTime(.001,t+len);s.connect(b);b.connect(g);g.connect(T.g);s.start(t);s.stop(t+len+.02)}
+function kick(t){var o=ctx.createOscillator(),g=ctx.createGain();o.frequency.setValueAtTime(120,t);o.frequency.exponentialRampToValueAtTime(45,t+.12);g.gain.setValueAtTime(.7,t);g.gain.exponentialRampToValueAtTime(.001,t+.2);o.connect(g);g.connect(T.g);o.start(t);o.stop(t+.22)}
+function bassN(nm,k,nx){var r=RT[nm],q=nm.indexOf("°")>0?[0,3,6,3]:nm.indexOf("m")>0?[0,3,7,5]:[0,4,7,9];return k===3&&RT[nx]!==r?RT[nx]-1:r+q[k]}
+function beat(nm,nx,k,t,bl){var md=T.solo?"2":$("bk").value;if(md==="0")return;
+ pluck(bassN(nm,k,nx),t,1.2,bl*.92);
+ if(md==="2"){nzb(t,7000,"highpass",.18,.06);if(k&1){nzb(t+($("sw").checked?bl*2/3:bl/2),7000,"highpass",.12,.06);nzb(t,1800,"bandpass",.4,.12)}else kick(t)}}
+function backing(i,t){var bl=60/bpm,nm=T.names,n=nm.length,k;
+ if(T.prog){var b=i>>2;beat(nm[b%n],nm[(b+1)%n],i&3,t,bl)}
+ else if(T.u===2){if(i%2===0)beat(nm[0],nm[0],(i/2)%4,t,bl)}
+ else for(k=0;k<4;k++)beat(nm[i%n],nm[(i+1)%n],k,t+k*bl,bl)}
+function wav(r,name){var n=r.length,c=r.numberOfChannels,sr=r.sampleRate,a=new ArrayBuffer(44+n*2*c),v=new DataView(a),o=44,i,h,x,ch=[];
+ function w(p,z){for(var q=0;q<z.length;q++)v.setUint8(p+q,z.charCodeAt(q))}
+ w(0,"RIFF");v.setUint32(4,36+n*2*c,true);w(8,"WAVEfmt ");v.setUint32(16,16,true);v.setUint16(20,1,true);v.setUint16(22,c,true);v.setUint32(24,sr,true);v.setUint32(28,sr*2*c,true);v.setUint16(32,2*c,true);v.setUint16(34,16,true);w(36,"data");v.setUint32(40,n*2*c,true);
+ for(h=0;h<c;h++)ch.push(r.getChannelData(h));
+ for(i=0;i<n;i++)for(h=0;h<c;h++){x=Math.max(-1,Math.min(1,ch[h][i]));v.setInt16(o,x<0?x*32768:x*32767,true);o+=2}
+ var u=URL.createObjectURL(new Blob([a],{type:"audio/wav"})),l=document.createElement("a");l.href=u;l.download="blues-"+name+"-"+bpm+"bpm.wav";document.body.appendChild(l);l.click();setTimeout(function(){URL.revokeObjectURL(u);l.remove()},800)}
+function expo(pk,k){stop();actx();
+ var sr=44100,bl=60/bpm,sv={c:ctx,m:master,b:bufs,n:nb},sum=0,i,p,t=.1,P,b,d,off,pr;
+ T={u:pk.u,prog:pk.prog,solo:pk.solo,names:pk.names};
+ for(i=0;i<pk.items.length;i++)sum+=dur(i);
+ P=pk.prog?2:Math.max(2,Math.ceil(32*bl/sum));
+ off=new OfflineAudioContext(2,Math.ceil((sum*P+2.5)*sr),sr);
+ ctx=off;master=off.createGain();master.gain.value=$("vol").value/100;master.connect(off.destination);T.g=master;bufs={};nb=null;
+ for(p=0;p<P;p++)for(i=0;i<pk.items.length;i++){d=dur(i);playStep(pk.items[i].n,t,pk.items[i].v,d);backing(i,t);t+=d}
+ if(metro)for(b=0;b*bl<sum*P;b++)click(.1+b*bl,b%4===0);
+ pr=off.startRendering();ctx=sv.c;master=sv.m;bufs=sv.b;nb=sv.n;T=null;
+ pr.then(function(r){wav(r,k)})}
+function dur(i){var bl=60/bpm,u=T.u;if(u===2){var e=$("sw").checked?bl*2/3:bl/2;return i%2?bl-e:e}return bl/u}
+function tick(){
+ var now=ctx.currentTime,bl=60/bpm;
+ while(T.b<now+LA){if(metro||T.b<T.start-.001){click(T.b,T.bn%4===0);T.ev.push({t:T.b,dot:T.bn%4})}T.b+=bl;T.bn++}
+ while(T.items&&T.t<now+LA){var it=T.items[T.i],d=dur(T.i);playStep(it.n,T.t,it.v,d);backing(T.i,T.t);T.ev.push({t:T.t,i:T.prog?T.i>>2:T.i,n:it.n});T.t+=d;T.i++;
+  if(T.i>=T.items.length){if($("lp").checked)T.i=0;else{T.end=T.t;T.items=null}}}
+ if(T.end&&now>T.end+.3)stop()
+}
+function view(){
+ if(!T)return;var now=ctx.currentTime,e;
+ while(T.ev.length&&T.ev[0].t<=now){e=T.ev.shift();
+  if(e.dot!==undefined){var ds=$("dots").children,j;for(j=0;j<4;j++)ds[j].className="dot"+(j===e.dot?" b":"")}
+  else if(T.el){var o=T.el.querySelectorAll(".on"),z;for(z=0;z<o.length;z++)o[z].classList.remove("on");o=T.el.querySelectorAll('[data-i="'+e.i+'"]');for(z=0;z<o.length;z++)o[z].classList.add("on");if(T.fb&&e.n)lite(T.fb,e.n)}}
+ raf=requestAnimationFrame(view)
+}
+function stop(){
+ if(T){try{T.g.gain.setTargetAtTime(0,ctx.currentTime,.03)}catch(x){}if(T.fb)lite(T.fb,[]);if(T.el){var o=T.el.querySelectorAll(".on"),z;for(z=0;z<o.length;z++)o[z].classList.remove("on")}}
+ T=null;clearInterval(timer);cancelAnimationFrame(raf);
+ var ds=$("dots").children,j;for(j=0;j<4;j++)ds[j].className="dot";
+ var bs=document.querySelectorAll(".pl");for(j=0;j<bs.length;j++){bs[j].textContent="▶ Play";bs[j].classList.remove("on")}
+}
+function start(el,pack,btn){
+ stop();actx();var t0=ctx.currentTime+.08,cnt=$("ci").checked&&pack?4*60/bpm:0,g=ctx.createGain();g.connect(master);
+ T={g:g,items:pack?pack.items:null,u:pack?pack.u:1,prog:pack&&pack.prog,i:0,b:t0,bn:0,t:t0+cnt,start:t0+cnt,ev:[],el:el,names:pack?pack.names:["A7"],solo:pack&&pack.solo,fb:pack&&pack.fb};
+ if(btn){btn.textContent="■ Stop";btn.classList.add("on")}
+ timer=setInterval(tick,25);tick();raf=requestAnimationFrame(view)
+}
+function build(){
+ var e=document.querySelectorAll(".tb"),i,k,pk,c;
+ for(i=0;i<e.length;i++){(function(el){
+  var k=el.getAttribute("data-k"),pk=mk(k);
+  el.className="card";el.innerHTML='<div class="hd"><h3>'+el.getAttribute("data-t")+'</h3><div><button class="pl">▶ Play</button> <button class="wv">⬇ WAV</button></div></div>'+pk.fb0+"<pre>"+pk.html+"</pre>";
+  var b=el.querySelector(".pl"),pre=el.querySelector("pre");pk.fb=el.querySelector("svg");el.querySelector(".wv").onclick=function(){expo(pk,k)};
+  b.onclick=function(){if(T&&T.el===pre)stop();else start(pre,pk,b)}
+ })(e[i])}
+ e=document.querySelectorAll(".prog");
+ for(i=0;i<e.length;i++){(function(el){
+  var k=el.getAttribute("data-k"),p=PR[k],pk=mkProg(k),g="",n;
+  for(n=0;n<12;n++)g+='<div class="c" data-i="'+n+'"><small>Bar '+(n+1)+"</small>"+p.names[n]+"</div>";
+  el.className="card";el.innerHTML='<div class="hd"><h3>'+el.getAttribute("data-t")+'</h3><div><button class="pl">▶ Play</button> <button class="wv">⬇ WAV</button></div></div><div class="grid'+(p.j?" j":"")+'">'+g+"</div>";
+  var b=el.querySelector(".pl"),gr=el.querySelector(".grid");el.querySelector(".wv").onclick=function(){expo(pk,k)};
+  b.onclick=function(){if(T&&T.el===gr)stop();else start(gr,pk,b)}
+ })(e[i])}
+}
+function setBpm(v){bpm=Math.max(40,Math.min(200,v|0));$("bpm").value=bpm;$("bv").textContent=bpm}
+$("bpm").oninput=function(){setBpm(+this.value)};
+$("dn").onclick=function(){setBpm(bpm-1)};$("up").onclick=function(){setBpm(bpm+1)};
+$("pre").onclick=function(ev){var b=ev.target.getAttribute&&ev.target.getAttribute("data-b");if(b)setBpm(+b)};
+$("vol").oninput=function(){if(master)master.gain.value=this.value/100};
+$("stop").onclick=stop;
+$("mt").onclick=function(){metro=!metro;this.classList.toggle("on",metro);if(metro&&!T)start(null,null,null);else if(!metro&&T&&!T.items)stop()};
+document.addEventListener("keydown",function(e){if(e.code==="Space"&&e.target.tagName!=="INPUT"&&e.target.tagName!=="BUTTON"){e.preventDefault();$("mt").click()}});
+build();
+})();
+</script>
+</body>
+</html>
